@@ -33,6 +33,21 @@ Build command:
 docker build -t my-image-name .
 ```
 
+Listing the images:
+``` bash
+docker images
+```
+
+Running a container:
+``` bash
+docker run -it <imageID>
+```
+
+Play also with:
+``` bash
+inspect ps stop rm rmi
+```
+
 ## Unit Testing
 
 Test files have to be postfixed with `_test.go` for the command `go test .` to play them.
