@@ -10,7 +10,7 @@ var streamWriter, wsHandler = webstream.Init()
 
 func initLogging() logchain.Logger {
 	params := logchain.Params{
-		"template":  "{{.timestamp}} {{.levelLetter}} {{.fileLine}} {{.msg}}",
+		"template":  "{{.timestamp}} " + version + " {{.levelLetter}} {{.fileLine}} {{.msg}}",
 		"verbosity": 3,
 		"stream":    io.MultiWriter(os.Stdout, streamWriter),
 	}

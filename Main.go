@@ -6,7 +6,7 @@ import "net/http"
 var version string = "0.0.0-local"
 
 func main() {
-	Logger.Info("Starting the server v", version)
+	Logger.Info("Starting the server")
 
 	app := newApp()
 

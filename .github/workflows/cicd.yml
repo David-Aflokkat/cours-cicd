@@ -43,14 +43,14 @@ jobs:
     needs: [build-and-push, versioning]
 
     # Our API server, running in the background
-    services:
-      backend:
-        image: ${{needs.versioning.outputs.imageName}}
-        credentials:
-          username: ${{github.actor}}
-          password: ${{secrets.GITHUB_TOKEN}}
-        ports:
-        - 8080:8080
+    # services:
+    #   backend:
+    #     image: ${{needs.versioning.outputs.imageName}}
+    #     credentials:
+    #       username: ${{github.actor}}
+    #       password: ${{secrets.GITHUB_TOKEN}}
+    #     ports:
+    #     - 8080:8080
 
     steps:
       - uses: actions/checkout@v4
