@@ -1,11 +1,11 @@
 package main
 
 import (
+	"encoding/json"
+	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
 	"os"
-	"encoding/json"
-	"gopkg.in/yaml.v3"
 )
 
 func yml2json() {

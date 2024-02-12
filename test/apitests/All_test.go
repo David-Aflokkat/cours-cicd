@@ -20,7 +20,7 @@ func init() {
 }
 
 func TestGetCats(t *testing.T) {
-
+ 
 	code := 0
 	result := []string{}
 	err := call("GET", "/cats", nil, &code, &result)

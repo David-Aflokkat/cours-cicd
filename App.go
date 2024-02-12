@@ -5,13 +5,10 @@ import "encoding/json"
 import "io/fs"
 import "net/http"
 
-import "github.com/gorilla/mux"
 import "gitlab.com/ggpack/webstream"
-
 
 //go:embed swagger-ui
 var content embed.FS
-
 
 func logReq(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -23,17 +20,17 @@ func logReq(next http.Handler) http.Handler {
 func newApp() http.Handler {
 	Logger.Info("Init the backend")
 
-	router := mux.NewRouter()
-	router.HandleFunc("/", getHomeHandler).Methods("GET")
-	router.HandleFunc("/api/cats", makeHandlerFunc(createCat)).Methods("POST")
-	router.HandleFunc("/api/cats", makeHandlerFunc(listCats)).Methods("GET")
-	router.HandleFunc("/api/cats/{catId}", makeHandlerFunc(getCat)).Methods("GET")
+	router := http.NewServeMux()
+	router.HandleFunc("GET /{$}", getHomeHandler)
+	router.HandleFunc("POST /api/cats", makeHandlerFunc(createCat))
+	router.HandleFunc("GET /api/cats", makeHandlerFunc(listCats))
+	router.HandleFunc("GET /api/cats/{catId}", makeHandlerFunc(getCat))
 
 	fsys, _ := fs.Sub(content, "swagger-ui")
-	router.PathPrefix("/swagger").Handler(http.StripPrefix("/swagger", http.FileServer(http.FS(fsys))))
+	router.Handle("GET /swagger/", http.StripPrefix("/swagger", http.FileServer(http.FS(fsys))))
 
-	router.HandleFunc("/ws", wsHandler)
-	router.HandleFunc("/logs", webstream.UiHandler("/../ws"))
+	router.HandleFunc("GET /ws", wsHandler)
+	router.HandleFunc("GET /logs", webstream.UiHandler("/../ws"))
 
 	return logReq(router)
 }

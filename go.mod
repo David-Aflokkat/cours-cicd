@@ -1,10 +1,9 @@
 module backend
 
-go 1.20
+go 1.22
 
 require (
 	github.com/google/uuid v1.3.1
-	github.com/gorilla/mux v1.8.0
 	gitlab.com/ggpack/logchain-go v1.1.0
 	gitlab.com/ggpack/webstream v0.0.4
 )
