@@ -1,4 +1,4 @@
-# Introduction
+# Introduction
 
 Cats demo REST API used to manage a local database of 🐈.
 
