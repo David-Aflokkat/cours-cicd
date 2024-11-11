@@ -1,8 +1,10 @@
 package apitests
 
-import "fmt"
-import "net/http"
-import "testing"
+import (
+	"fmt"
+	"net/http"
+	"testing"
+)
 
 var initCatId string
 
@@ -12,15 +14,17 @@ func init() {
 	call("GET", "/cats", nil, nil, &ids)
 
 	for _, id := range ids {
-		call("DELETE", "/cats/" + id, nil, nil, nil)
-	} 
+		code := 0
+		call("DELETE", "/cats/"+id, nil, &code, nil)
+		fmt.Println("DELETE /cats ->", code)
+	}
 
 	// Create a single cat into the DB
 	call("POST", "/cats", &CatModel{Name: "Toto"}, nil, &initCatId)
 }
 
 func TestGetCats(t *testing.T) {
- 
+
 	code := 0
 	result := []string{}
 	err := call("GET", "/cats", nil, &code, &result)
