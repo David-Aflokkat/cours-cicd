@@ -2,21 +2,19 @@ package main
 
 import "net/http"
 
-func getHomeHandler(w http.ResponseWriter, r *http.Request) {
+func getHomeHandler(res http.ResponseWriter, req *http.Request) {
 
-	w.WriteHeader(http.StatusOK)
-	w.Header().Add("Content-Type", "text/html")
-	w.Write([]byte(`
+	res.WriteHeader(http.StatusOK)
+	res.Header().Add("Content-Type", "text/html")
+	res.Write([]byte(`
 		<html>
 		<title>Cats API</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>😺</text></svg>">
 		<style>
-		html, body
-		{
+		html, body {
 			width: 100%;
 		}
-		a
-		{
+		a {
 			text-decoration: none;
 		}
 		</style>

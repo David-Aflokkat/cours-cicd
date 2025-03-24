@@ -1,11 +1,13 @@
 package main
 
-import "embed"
-import "encoding/json"
-import "io/fs"
-import "net/http"
+import (
+	"embed"
+	"encoding/json"
+	"io/fs"
+	"net/http"
 
-import "gitlab.com/ggpack/webstream"
+	"gitlab.com/ggpack/webstream"
+)
 
 //go:embed swagger-ui
 var content embed.FS
@@ -35,10 +37,10 @@ func newApp() http.Handler {
 	return logReq(router)
 }
 
-// Simple interface to implement to handle requests
+// Simpler way to handle requests
 type ServiceFunc func(*http.Request) (int, any)
 
-// Wraps the ServiceFunc to manke a http.HandlerFunc with panic handling and JSON response encoding
+// Wraps the ServiceFunc to make a http.HandlerFunc with panic handling and JSON response encoding
 func makeHandlerFunc(svcFunc ServiceFunc) http.HandlerFunc {
 
 	return func(res http.ResponseWriter, req *http.Request) {
@@ -46,8 +48,8 @@ func makeHandlerFunc(svcFunc ServiceFunc) http.HandlerFunc {
 		code, body := func(req *http.Request) (code int, body any) {
 			// General panic/error handler to keep the server up
 			defer func() {
-				if r := recover(); r != nil {
-					Logger.Error("Recovering from a panic: ", r)
+				if recov := recover(); recov != nil {
+					Logger.Error("Recovering from a panic: ", recov)
 					// Using the named return values
 					code = http.StatusInternalServerError
 					body = http.StatusText(code)

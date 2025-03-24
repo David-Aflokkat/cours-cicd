@@ -1,9 +1,11 @@
 package main
 
-import "encoding/json"
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
 
-import "github.com/google/uuid"
+	"github.com/google/uuid"
+)
 
 type Cat struct {
 	Name      string `json:"name"`
@@ -14,7 +16,7 @@ type Cat struct {
 
 // Simple in-memory database, for demo purpose
 var catsDatabase = map[string]Cat{
-	"id1": Cat{Name: "Toto", Color: "Grey", BirthDate: "2023-04-16"},
+	"id1": {Name: "Toto", Color: "Grey", BirthDate: "2023-04-16"},
 }
 
 func listMapKeys(aMap map[string]Cat) []string {
