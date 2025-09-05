@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"io/fs"
 	"net/http"
-
-	"gitlab.com/ggpack/webstream"
 )
 
 //go:embed swagger-ui
@@ -27,12 +25,10 @@ func newApp() http.Handler {
 	router.HandleFunc("POST /api/cats", makeHandlerFunc(createCat))
 	router.HandleFunc("GET /api/cats", makeHandlerFunc(listCats))
 	router.HandleFunc("GET /api/cats/{catId}", makeHandlerFunc(getCat))
+	//router.HandleFunc("DELETE /api/cats/{catId}", makeHandlerFunc(deleteCat))
 
 	fsys, _ := fs.Sub(content, "swagger-ui")
 	router.Handle("GET /swagger/", http.StripPrefix("/swagger", http.FileServer(http.FS(fsys))))
-
-	router.HandleFunc("GET /ws", wsHandler)
-	router.HandleFunc("GET /logs", webstream.UiHandler("/../ws"))
 
 	return logReq(router)
 }

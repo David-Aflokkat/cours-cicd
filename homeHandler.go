@@ -22,8 +22,6 @@ func getHomeHandler(res http.ResponseWriter, req *http.Request) {
 			<h2>Software version: ` + version + `</h2>
 			<br/>
 			<a href="swagger/"><h3>🖥️ Swagger OpenAPI UI</h3></a>
-			<br/>
-			<a href="logs"><h3>📜 Logs stream</h3></a>
 		<body>
 		</html>
 	`))
