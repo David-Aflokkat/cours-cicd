@@ -1,1 +1,1 @@
-initial-version
+ghcr.io/david-aflokkat/cours-cicd:bfb1091
