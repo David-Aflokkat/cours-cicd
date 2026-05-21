@@ -16,7 +16,7 @@ type Cat struct {
 
 // Simple in-memory database, for demo purpose
 var catsDatabase = map[string]Cat{
-	"id1": {Name: "Toto", Color: "Grey", BirthDate: "2023-04-16"},
+	"11111111-1111-1111-1111-111111111111": {Name: "Toto", Color: "Grey", BirthDate: "2023-04-16"},
 }
 
 func listMapKeys(aMap map[string]Cat) []string {
